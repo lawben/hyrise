@@ -55,7 +55,7 @@ async function run() {
 	const offset = 0
 	for(let i= 1 + offset; i <= maxRuns + offset; i++) {
 		let clients = 1
-		let latency = await runPgbench(clients, 2000)
+		let latency = await runPgbench(clients, 100000)
 
 		resultMap[clients.toString()] = latency
 	}
