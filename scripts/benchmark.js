@@ -14,6 +14,7 @@ const file = 'script.sql'
 let resultMap = {}
 
 function parseLatencyFromString(resultString) {
+	// console.log(resultString)
 	let lines = resultString.split("\n")
 	let statementLine = lines[lines.length-2].trim() //last line is empty
 	let latency = statementLine.split(" ")[0]
@@ -53,8 +54,8 @@ async function run() {
 	const maxRuns = 5
 	const offset = 0
 	for(let i= 1 + offset; i <= maxRuns + offset; i++) {
-		let clients = i * 5
-		let latency = await runPgbench(clients, 20)
+		let clients = 1
+		let latency = await runPgbench(clients, 2000)
 
 		resultMap[clients.toString()] = latency
 	}

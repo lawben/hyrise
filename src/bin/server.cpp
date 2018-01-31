@@ -27,8 +27,8 @@ int main(int argc, char* argv[]) {
     opossum::StorageManager::get().add_table("foo", table2);
 
     // Install a multi threaded scheduler
-    opossum::CurrentScheduler::set(
-        std::make_shared<opossum::NodeQueueScheduler>(opossum::Topology::create_numa_topology()));
+//    opossum::CurrentScheduler::set(
+//        std::make_shared<opossum::NodeQueueScheduler>(opossum::Topology::create_numa_topology()));
 
     boost::asio::io_service io_service;
 

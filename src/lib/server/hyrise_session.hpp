@@ -15,7 +15,6 @@ namespace opossum {
 enum SessionState {
   Setup = 100,
   WaitingForQuery,
-  ExecutingQuery,
 };
 
 using boost::asio::ip::tcp;

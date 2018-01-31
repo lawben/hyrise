@@ -23,6 +23,8 @@ namespace opossum {
 void HyriseSession::start() {
   // Keep a pointer to itself that will be released once the connection is closed
   _self = shared_from_this();
+  _sql_pipeline = std::make_unique<SQLPipeline>("SELECT * FROM foo WHERE a > 10000");
+  _sql_pipeline->get_result_table();
   _async_receive_header(STARTUP_HEADER_LENGTH);
 }
 
@@ -152,10 +154,11 @@ void HyriseSession::_send_ready_for_query() {
 }
 
 void HyriseSession::_accept_query() {
-  const auto sql = PostgresWireHandler::handle_query_packet(_input_packet, _expected_input_packet_length);
-  const std::vector<std::shared_ptr<ServerTask>> tasks = {std::make_shared<CreatePipelineTask>(_self, sql)};
-  _state = SessionState::ExecutingQuery;
-  CurrentScheduler::schedule_tasks(tasks);
+//  const auto sql = PostgresWireHandler::handle_query_packet(_input_packet, _expected_input_packet_length);
+  PostgresWireHandler::handle_query_packet(_input_packet, _expected_input_packet_length);
+//  const std::vector<std::shared_ptr<ServerTask>> tasks = {std::make_shared<CreatePipelineTask>(_self, sql)};
+//  CurrentScheduler::schedule_tasks(tasks);
+  query_executed();
 }
 
 void HyriseSession::_send_error(const std::string& message) {
