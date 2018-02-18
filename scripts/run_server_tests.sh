@@ -32,13 +32,11 @@ RUN_TEST () {
 
 echo -e "Starting to run server tests...\n"
 
-# TEST 1: create table
-RUN_TEST "CREATE TABLE" "CREATE TABLE TEST (id char(5) PRIMARY KEY, name VARCHAR(10));"
-
-# TEST 2: simple select statement
+# make sure, the table exists before running this test
+# TEST 1: simple select statement
 RUN_TEST "SIMPLE QUERY" "SELECT * FROM ITEM LIMIT 2"
 
-# TEST 3: complex statement 1
+# TEST 2: complex statement 1
 # ...
 
 # stop server
